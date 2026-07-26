@@ -1,4 +1,5 @@
 import * as React from "react";
+import Link from "next/link";
 
 import { cn } from "@/lib/cn";
 
@@ -44,10 +45,15 @@ type ButtonAsLink = CommonProps &
 
 export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
+/** Internal paths (start with "/", not protocol-relative "//"). */
+function isInternal(href: string): boolean {
+  return href.startsWith("/") && !href.startsWith("//");
+}
+
 /**
- * Polymorphic button. Renders an <a> when `href` is provided, otherwise a
- * <button>. External links (http, mailto, tel, absolute /resume PDF) open
- * safely with `rel="noopener"` when they target a new window.
+ * Polymorphic button/link. Internal `href` values render through `next/link`
+ * so the configured `basePath` (GitHub Pages) is applied automatically.
+ * External links (http, mailto, tel) and `/public` asset paths use a plain <a>.
  */
 export function Button(props: ButtonProps) {
   const { variant = "primary", size = "md", className, children, ...rest } =
@@ -55,18 +61,29 @@ export function Button(props: ButtonProps) {
   const classes = cn(base, variants[variant], sizes[size], className);
 
   if ("href" in props && props.href !== undefined) {
+    const { href, ...anchorRest } = rest as {
+      href: string;
+    } & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+
+    if (isInternal(href)) {
+      return (
+        <Link href={href} className={classes} {...anchorRest}>
+          {children}
+        </Link>
+      );
+    }
     return (
-      <a
-        className={classes}
-        {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
-      >
+      <a className={classes} {...anchorRest} href={href}>
         {children}
       </a>
     );
   }
 
   return (
-    <button className={classes} {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}>
+    <button
+      className={classes}
+      {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
       {children}
     </button>
   );

@@ -1,18 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { useActionState } from "react";
-import { CheckCircle2, Loader2, Mail, Send } from "lucide-react";
+import { CheckCircle2, Mail, Send } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Callout } from "@/components/ui/callout";
 import { cn } from "@/lib/cn";
-import {
-  submitContact,
-  type ContactReason,
-} from "@/app/contact/actions";
+import { profile } from "@/data/profile";
 
-const REASONS: ContactReason[] = [
+const REASONS = [
   "Employment opportunity",
   "Data-center project",
   "Mechanical or thermal engineering",
@@ -22,7 +18,47 @@ const REASONS: ContactReason[] = [
   "Technical discussion",
   "Consulting",
   "Other",
-];
+] as const;
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type Fields = {
+  name: string;
+  email: string;
+  organization: string;
+  role: string;
+  subject: string;
+  reason: string;
+  message: string;
+};
+
+const EMPTY: Fields = {
+  name: "",
+  email: "",
+  organization: "",
+  role: "",
+  subject: "",
+  reason: REASONS[0],
+  message: "",
+};
+
+function buildMailto(f: Fields): string {
+  const subject = f.subject || f.reason;
+  const body = [
+    `Name: ${f.name}`,
+    `Email: ${f.email}`,
+    f.organization ? `Organization: ${f.organization}` : null,
+    f.role ? `Role: ${f.role}` : null,
+    `Reason: ${f.reason}`,
+    "",
+    f.message,
+  ]
+    .filter(Boolean)
+    .join("\n");
+  return `mailto:${profile.email}?subject=${encodeURIComponent(
+    subject,
+  )}&body=${encodeURIComponent(body)}`;
+}
 
 function Field({
   id,
@@ -52,11 +88,7 @@ function Field({
       </label>
       {children}
       {error && (
-        <p
-          id={`${id}-error`}
-          role="alert"
-          className="mt-1.5 text-xs text-danger"
-        >
+        <p id={`${id}-error`} role="alert" className="mt-1.5 text-xs text-danger">
           {error}
         </p>
       )}
@@ -67,103 +99,157 @@ function Field({
 const inputClasses =
   "w-full rounded-md border border-border bg-surface px-3.5 py-2.5 text-sm text-foreground placeholder:text-faint transition-colors focus:border-accent focus-visible:outline-2 focus-visible:outline-offset-2";
 
+/**
+ * Contact form. On a static host (GitHub Pages) the message is composed into a
+ * prefilled mailto: link that opens the visitor's email client. No data is
+ * transmitted through this site's server.
+ *
+ * To restore server-side email on Vercel, replace this with the server-action
+ * version (see `src/app/contact/actions.ts`) and remove `output: "export"`.
+ */
 export function ContactForm() {
-  const [state, formAction, pending] = useActionState(submitContact, null);
+  const [fields, setFields] = React.useState<Fields>(EMPTY);
+  const [errors, setErrors] = React.useState<Partial<Fields>>({});
+  const [submitted, setSubmitted] = React.useState<{ mailto: string } | null>(
+    null,
+  );
 
-  const v = state?.values ?? {};
-  const fe = state?.fieldErrors ?? {};
+  function update<K extends keyof Fields>(key: K, value: string) {
+    setFields((f) => ({ ...f, [key]: value }));
+    if (errors[key]) setErrors((e) => ({ ...e, [key]: undefined }));
+  }
+
+  function validate(): boolean {
+    const next: Partial<Fields> = {};
+    if (fields.name.trim().length < 2) next.name = "Please enter your name.";
+    if (!EMAIL_RE.test(fields.email.trim()))
+      next.email = "Enter a valid email.";
+    if (fields.subject.trim().length < 2) next.subject = "Add a subject.";
+    if (fields.message.trim().length < 10)
+      next.message = "Message should be at least 10 characters.";
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  }
+
+  function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!validate()) return;
+    setSubmitted({ mailto: buildMailto({ ...fields }) });
+  }
+
+  if (submitted) {
+    return (
+      <div className="space-y-4">
+        <Callout tone="success" title="Ready to send">
+          <p>
+            Your email client will open with this message pre-filled and
+            addressed to {profile.email}. If it didn’t open automatically, use
+            the button below.
+          </p>
+        </Callout>
+        <div className="flex flex-wrap gap-3">
+          <a
+            href={submitted.mailto}
+            className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-accent px-4 text-sm font-medium text-accent-contrast hover:bg-accent-hover"
+          >
+            <Mail className="h-4 w-4" />
+            Open in email client
+          </a>
+          <Button
+            variant="ghost"
+            onClick={() => {
+              setSubmitted(null);
+              setFields(EMPTY);
+            }}
+          >
+            Send another
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <form action={formAction} className="space-y-5" noValidate>
-      {/* Success / fallback banner */}
-      {state && (
-        <Callout tone={state.ok ? "success" : "warning"} title={state.ok ? "Sent" : "Heads up"}>
-          <p>{state.message}</p>
-          {state.mailto && (
-            <a
-              href={state.mailto}
-              className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline"
-            >
-              <Mail className="h-4 w-4" />
-              Open in your email client
-            </a>
-          )}
-        </Callout>
-      )}
-
-      {/* Honeypot (visually hidden, not for users) */}
+    <form onSubmit={onSubmit} className="space-y-5" noValidate>
+      {/* Honeypot (hidden, not for users) */}
       <div aria-hidden="true" className="absolute left-[-9999px]">
         <label htmlFor="website">Website</label>
-        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+        <input
+          id="website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field id="name" label="Name" required error={fe.name}>
+        <Field id="name" label="Name" required error={errors.name}>
           <input
             id="name"
-            name="name"
             type="text"
             required
-            defaultValue={v.name}
             autoComplete="name"
-            aria-invalid={Boolean(fe.name)}
-            aria-describedby={fe.name ? "name-error" : undefined}
-            className={cn(inputClasses, fe.name && "border-danger")}
+            value={fields.name}
+            onChange={(e) => update("name", e.target.value)}
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? "name-error" : undefined}
+            className={cn(inputClasses, errors.name && "border-danger")}
           />
         </Field>
-        <Field id="email" label="Email" required error={fe.email}>
+        <Field id="email" label="Email" required error={errors.email}>
           <input
             id="email"
-            name="email"
             type="email"
             required
-            defaultValue={v.email}
             autoComplete="email"
-            aria-invalid={Boolean(fe.email)}
-            aria-describedby={fe.email ? "email-error" : undefined}
-            className={cn(inputClasses, fe.email && "border-danger")}
+            value={fields.email}
+            onChange={(e) => update("email", e.target.value)}
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "email-error" : undefined}
+            className={cn(inputClasses, errors.email && "border-danger")}
           />
         </Field>
-        <Field id="organization" label="Organization" error={fe.organization}>
+        <Field id="organization" label="Organization">
           <input
             id="organization"
-            name="organization"
             type="text"
-            defaultValue={v.organization}
             autoComplete="organization"
+            value={fields.organization}
+            onChange={(e) => update("organization", e.target.value)}
             className={inputClasses}
           />
         </Field>
-        <Field id="role" label="Role" error={fe.role}>
+        <Field id="role" label="Role">
           <input
             id="role"
-            name="role"
             type="text"
-            defaultValue={v.role}
+            value={fields.role}
+            onChange={(e) => update("role", e.target.value)}
             className={inputClasses}
           />
         </Field>
       </div>
 
-      <Field id="subject" label="Subject" required error={fe.subject}>
+      <Field id="subject" label="Subject" required error={errors.subject}>
         <input
           id="subject"
-          name="subject"
           type="text"
           required
-          defaultValue={v.subject}
-          className={cn(inputClasses, fe.subject && "border-danger")}
-          aria-invalid={Boolean(fe.subject)}
-          aria-describedby={fe.subject ? "subject-error" : undefined}
+          value={fields.subject}
+          onChange={(e) => update("subject", e.target.value)}
+          aria-invalid={Boolean(errors.subject)}
+          aria-describedby={errors.subject ? "subject-error" : undefined}
+          className={cn(inputClasses, errors.subject && "border-danger")}
         />
       </Field>
 
       <Field id="reason" label="Reason for contact" required>
         <select
           id="reason"
-          name="reason"
           required
-          defaultValue={v.reason ?? REASONS[0]}
+          value={fields.reason}
+          onChange={(e) => update("reason", e.target.value)}
           className={cn(inputClasses, "pr-8")}
         >
           {REASONS.map((r) => (
@@ -174,36 +260,27 @@ export function ContactForm() {
         </select>
       </Field>
 
-      <Field id="message" label="Message" required error={fe.message}>
+      <Field id="message" label="Message" required error={errors.message}>
         <textarea
           id="message"
-          name="message"
           required
           rows={6}
-          defaultValue={v.message}
-          aria-invalid={Boolean(fe.message)}
-          aria-describedby={fe.message ? "message-error" : undefined}
-          className={cn(inputClasses, "resize-y", fe.message && "border-danger")}
+          value={fields.message}
+          onChange={(e) => update("message", e.target.value)}
+          aria-invalid={Boolean(errors.message)}
+          aria-describedby={errors.message ? "message-error" : undefined}
+          className={cn(inputClasses, "resize-y", errors.message && "border-danger")}
         />
       </Field>
 
       <div className="flex flex-wrap items-center gap-4">
-        <Button type="submit" disabled={pending}>
-          {pending ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Send className="h-4 w-4" />
-          )}
-          {pending ? "Sending…" : "Send message"}
+        <Button type="submit">
+          <Send className="h-4 w-4" />
+          Compose message
         </Button>
-        {state?.ok && (
-          <span className="inline-flex items-center gap-1.5 text-sm text-success">
-            <CheckCircle2 className="h-4 w-4" />
-            Done
-          </span>
-        )}
-        <p className="text-xs text-faint">
-          Protected by a honeypot field. Never share confidential information.
+        <p className="inline-flex items-center gap-1.5 text-xs text-faint">
+          <CheckCircle2 className="h-3.5 w-3.5 text-success" />
+          Opens in your email client · protected by a honeypot field
         </p>
       </div>
     </form>

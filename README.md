@@ -73,19 +73,48 @@ npm run format:check
 
 ---
 
-## Production build & Vercel deployment
+## Production build
 
-The site is fully static and deploys to Vercel with zero configuration.
+```bash
+npm run build      # static export → ./out (configured via output: "export")
+```
 
-1. Push the repository to GitHub.
-2. In Vercel, **New Project → Import** the repository.
-3. Framework preset: **Next.js**. Build command `next build` (default).
-4. Add environment variables (see table above) in **Project → Settings → Environment Variables**.
-5. Deploy.
+> This project is configured for **static export** (`output: "export"` in
+> `next.config.ts`), so there is no Node server to run with `npm start`. Serve
+> the generated `out/` directory from any static host.
 
-For the contact form to send real email, set `RESEND_API_KEY` and a verified
-`RESEND_FROM` address in Resend. Until then the form returns a prefilled
-`mailto:` link automatically.
+---
+
+## GitHub Pages deployment (free, recommended)
+
+The repo includes a workflow at `.github/workflows/deploy.yml` that builds the
+static site and publishes it to GitHub Pages on every push to `main`.
+
+**One-time setup (in GitHub):**
+
+1. Push to `main` (the workflow runs automatically).
+2. Repo **→ Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Wait for the "Deploy to GitHub Pages" action to finish, then visit:
+   `https://abhinavbharata.github.io/Myportfolio/`
+
+Because the repo is named `Myportfolio`, the site is served under
+`/Myportfolio/`. The workflow sets `NEXT_PUBLIC_BASE_PATH=/Myportfolio` so all
+links, assets, the sitemap, and canonical URLs resolve correctly.
+
+> The contact form composes a prefilled **mailto:** link on GitHub Pages
+> (static hosts can't run server actions). No data passes through a server.
+
+---
+
+## Vercel deployment (alternative, full features)
+
+To restore server-side features (e.g. real contact-form email via Resend):
+
+1. Remove `output: "export"` (and the `basePath`/`trailingSlash`/`images`
+   lines) from `next.config.ts`.
+2. Restore the server-action contact form (see `src/app/contact/actions.ts`)
+   instead of the client `mailto:` form.
+3. Import the repo into Vercel and add env vars (see table above).
 
 ---
 

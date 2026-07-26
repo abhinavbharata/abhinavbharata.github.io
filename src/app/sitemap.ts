@@ -3,6 +3,8 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/data/site-config";
 import { projects } from "@/data/projects";
 
+export const dynamic = "force-static";
+
 /**
  * Dynamic sitemap. Static routes plus one entry per project case study.
  * `/cfd-agent` is intentionally omitted — it 308-redirects to the canonical

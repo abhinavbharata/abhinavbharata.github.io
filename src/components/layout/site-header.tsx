@@ -8,6 +8,7 @@ import { Download, Menu, X } from "lucide-react";
 import { mainNav } from "@/data/navigation";
 import { profile } from "@/data/profile";
 import { cn } from "@/lib/cn";
+import { asset } from "@/lib/paths";
 import { Container } from "@/components/ui/container";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { SocialLinks } from "@/components/layout/social-links";
@@ -145,7 +146,7 @@ export function SiteHeader() {
             <ThemeToggle />
             {profile.resumeAvailable && (
               <a
-                href={profile.resumePath}
+                href={asset(profile.resumePath)}
                 download
                 className="hidden items-center gap-1.5 rounded-md bg-accent px-3 py-2 text-sm font-medium text-accent-contrast transition-colors hover:bg-accent-hover sm:inline-flex focus-visible:outline-2 focus-visible:outline-offset-2"
               >
@@ -234,7 +235,7 @@ export function SiteHeader() {
             <SocialLinks includeEmail={false} />
             {profile.resumeAvailable && (
               <a
-                href={profile.resumePath}
+                href={asset(profile.resumePath)}
                 download
                 className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-4 py-2.5 text-sm font-medium text-accent-contrast hover:bg-accent-hover"
               >

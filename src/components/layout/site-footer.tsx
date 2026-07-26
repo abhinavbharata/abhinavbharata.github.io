@@ -3,6 +3,7 @@ import { Mail, MapPin } from "lucide-react";
 
 import { footerNav } from "@/data/navigation";
 import { profile } from "@/data/profile";
+import { asset } from "@/lib/paths";
 import { Container } from "@/components/ui/container";
 import { SocialLinks } from "@/components/layout/social-links";
 
@@ -62,7 +63,7 @@ export function SiteFooter() {
             <p className="eyebrow">Resume</p>
             {profile.resumeAvailable ? (
               <a
-                href={profile.resumePath}
+                href={asset(profile.resumePath)}
                 download
                 className="mt-3 inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-2 text-sm text-foreground transition-colors hover:border-border-strong"
               >
