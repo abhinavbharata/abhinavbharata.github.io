@@ -190,7 +190,7 @@ export const projects: Project[] = [
       "hybrid-inverter-cooling",
       "portable-heat-pump",
     ],
-    featured: true,
+    featured: false,
     seoTitle: "cfd-agent | AI-Powered OpenFOAM Simulation Assistant",
     seoDescription:
       "cfd-agent is a Python-based engineering assistant that converts natural-language CFD requirements into structured OpenFOAM cases with automated geometry analysis, meshing, solver monitoring, diagnostics, and results interpretation.",
@@ -687,7 +687,7 @@ export const projects: Project[] = [
       "Design reviews across mechanical, electrical, and firmware are what made the 16→10-week cycle possible.",
     ],
     relatedProjects: ["portable-heat-pump", "data-center-compute-cfd", "cfd-agent"],
-    featured: false,
+    featured: true,
     seoTitle: "Hybrid Inverter & Air-Conditioning Cooling | Thermal Design",
     seoDescription:
       "Compact hybrid inverter and air-conditioning system for 3 kW and 6 kW power systems: 18% thermal-efficiency improvement, 22% component-count reduction, and a 16-to-10-week design-cycle reduction.",
