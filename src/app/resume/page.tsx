@@ -18,7 +18,7 @@ import { profile } from "@/data/profile";
 export const metadata: Metadata = {
   title: "Résumé",
   description:
-    "Digital résumé for Abhinav Bharata — mechanical and thermal engineer: experience, education, skills, and the cfd-agent engineering-software project.",
+    "Digital résumé for Abhinav Bharata — a mechanical engineer: experience, education, skills, and the cfd-agent engineering-software project.",
   alternates: { canonical: "/resume" },
 };
 
@@ -88,7 +88,7 @@ export default function ResumePage() {
               <SocialLinks size="sm" includeEmail={false} />
             </div>
             <p className="mt-5 text-sm leading-relaxed text-muted">
-              Mechanical and thermal engineer with 7+ years across thermal
+              Mechanical engineer with 7+ years across thermal
               systems, CFD, mechanical design, product development, and
               mission-critical infrastructure — from concept and simulation
               through BIM documentation, multidisciplinary coordination, testing,

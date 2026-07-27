@@ -9,7 +9,7 @@ import { env } from "@/lib/env";
  */
 export const profile = {
   name: "Abhinav Bharata",
-  primaryTitle: "Mechanical and Thermal Engineer",
+  primaryTitle: "Mechanical Engineer · Data Center & Thermal Systems",
   extendedTitle:
     "Data Center Infrastructure | CFD | Revit BIM | Thermal Systems | Engineering Automation",
   location: "Pelzer, South Carolina",

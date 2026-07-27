@@ -17,7 +17,7 @@ import { education } from "@/data/education";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About Abhinav Bharata — a mechanical and thermal engineer working across data-center infrastructure, CFD, Revit BIM, thermal systems, product development, and engineering automation.",
+    "About Abhinav Bharata — a mechanical engineer working across data-center infrastructure, thermal systems, CFD, Revit BIM, and product development.",
   alternates: { canonical: "/about" },
 };
 
@@ -27,7 +27,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="Engineering across infrastructure, simulation, and product development."
-        description="A mechanical and thermal engineer with more than seven years of experience across thermal systems, CFD, mechanical design, product development, and mission-critical infrastructure."
+        description="A mechanical engineer with more than seven years of experience across thermal systems, CFD, mechanical design, product development, and mission-critical infrastructure."
       >
         <Breadcrumbs
           items={[
@@ -43,7 +43,7 @@ export default function AboutPage() {
             <Section eyebrow="Introduction" title="Profile">
               <div className="space-y-4 text-base leading-relaxed text-muted">
                 <p>
-                  I am a Mechanical and Thermal Engineer with more than seven
+                  I am a Mechanical Engineer with more than seven
                   years of experience across thermal systems, CFD, mechanical
                   design, product development, and mission-critical
                   infrastructure. My work spans concept development, simulation,

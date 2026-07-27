@@ -8,18 +8,18 @@ export const siteConfig = {
   name: "Abhinav Bharata",
   shortName: "AB",
   formalName: "Abhinav Bharata",
-  primaryTitle: "Mechanical and Thermal Engineer",
+  primaryTitle: "Mechanical Engineer · Data Center & Thermal Systems",
   extendedTitle:
     "Data Center Infrastructure | CFD | Revit BIM | Thermal Systems | Engineering Automation",
   /** Production origin. Falls back to localhost for local development. */
   url: env.siteUrl,
   description:
-    "Portfolio of Abhinav Bharata, a mechanical and thermal engineer specializing in data-center infrastructure, CFD, Revit BIM, liquid cooling, power-module validation, OpenFOAM, and engineering automation.",
+    "Portfolio of Abhinav Bharata, a mechanical engineer specializing in data-center infrastructure, thermal systems, CFD, Revit BIM, liquid cooling, and power-module validation.",
   locale: "en_US",
   twitterHandle: "",
   positioning: {
     central:
-      "Mechanical and thermal engineer designing mission-critical infrastructure, advanced cooling systems, simulation-driven products, and intelligent engineering tools.",
+      "Mechanical engineer designing and validating data-center infrastructure, thermal systems, and CFD-driven products.",
     supporting:
       "I work across data-center infrastructure, Revit BIM, liquid cooling, CFD, mechanical systems, power-module validation, and engineering automation.",
     innovation:

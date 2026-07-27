@@ -32,7 +32,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Mechanical, Thermal and Data Center Engineer`,
+    default: `${siteConfig.name} | Mechanical Engineer · Data Center · Thermal · CFD`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -59,12 +59,12 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} | Mechanical, Thermal and Data Center Engineer`,
+    title: `${siteConfig.name} | Mechanical Engineer · Data Center · Thermal · CFD`,
     description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | Mechanical, Thermal and Data Center Engineer`,
+    title: `${siteConfig.name} | Mechanical Engineer · Data Center · Thermal · CFD`,
     description: siteConfig.description,
   },
   robots: {
