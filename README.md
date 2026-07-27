@@ -95,11 +95,12 @@ static site and publishes it to GitHub Pages on every push to `main`.
 1. Push to `main` (the workflow runs automatically).
 2. Repo **→ Settings → Pages → Build and deployment → Source: GitHub Actions**.
 3. Wait for the "Deploy to GitHub Pages" action to finish, then visit:
-   `https://abhinavbharata.github.io/Myportfolio/`
+   `https://abhinavbharata.github.io/`
 
-Because the repo is named `Myportfolio`, the site is served under
-`/Myportfolio/`. The workflow sets `NEXT_PUBLIC_BASE_PATH=/Myportfolio` so all
-links, assets, the sitemap, and canonical URLs resolve correctly.
+This repo is named `abhinavbharata.github.io`, so GitHub serves it at the apex
+URL with **no basePath**. (`next.config.ts` reads `NEXT_PUBLIC_BASE_PATH`, which
+is empty here. For a project repo served under `/<repo>/`, set that env var to
+`/<repo>` instead.)
 
 > The contact form composes a prefilled **mailto:** link on GitHub Pages
 > (static hosts can't run server actions). No data passes through a server.

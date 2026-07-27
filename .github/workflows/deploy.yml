@@ -18,9 +18,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Repo is served at <user>.github.io/Myportfolio, so basePath must match.
-      NEXT_PUBLIC_BASE_PATH: /Myportfolio
-      NEXT_PUBLIC_SITE_URL: https://abhinavbharata.github.io/Myportfolio
+      # User/organization site → served at the apex (no basePath needed).
+      NEXT_PUBLIC_SITE_URL: https://abhinavbharata.github.io
     steps:
       - uses: actions/checkout@v4
 
