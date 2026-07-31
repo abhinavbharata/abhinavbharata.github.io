@@ -72,6 +72,7 @@ export type Project = {
 
   confidentialityNote?: string;
   relatedProjects?: string[];
+  personalProject?: boolean;
   featured: boolean;
   seoTitle: string;
   seoDescription: string;

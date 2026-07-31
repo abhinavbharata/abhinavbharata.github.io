@@ -12,6 +12,9 @@ function PrimaryCategories({ project }: { project: Project }) {
   const cats = project.category.slice(0, 3);
   return (
     <div className="flex flex-wrap gap-1.5">
+      {project.personalProject && (
+        <Badge tone="accent">Personal Project</Badge>
+      )}
       {cats.map((c) => (
         <Badge key={c} tone="neutral">
           {c}

@@ -66,37 +66,6 @@ const solverSpecExample = `SolverSpec(
 export function CfdAgentDeepDive() {
   return (
     <div className="space-y-16">
-      {/* Problem statement */}
-      <Section
-        eyebrow="Problem"
-        title="Making OpenFOAM more accessible without hiding engineering decisions"
-      >
-        <p className="text-base leading-relaxed text-muted">
-          OpenFOAM is powerful but has a steep learning curve. A working
-          simulation requires many interdependent field and dictionary files
-          across <code className="font-mono text-accent">0/</code>,{" "}
-          <code className="font-mono text-accent">constant/</code>, and{" "}
-          <code className="font-mono text-accent">system/</code>. The user must
-          understand solver selection, physical models, fluid properties,
-          turbulence models, boundary conditions, geometry units, mesh
-          generation, numerical schemes, linear-solver controls, residuals,
-          convergence, fatal errors, and physical interpretation.
-        </p>
-        <Callout tone="warning" title="A simulation can execute and still be wrong" className="mt-5">
-          <p>
-            A solver may run successfully even when the geometry scale is wrong,
-            boundary conditions are inconsistent, the intended geometry was never
-            incorporated into the mesh, or the numerical solution is not
-            physically meaningful.
-          </p>
-        </Callout>
-        <p className="mt-5 text-base leading-relaxed text-foreground/90">
-          <span className="font-medium">Objective:</span> make OpenFOAM easier
-          to use without removing the engineering decisions required for a
-          trustworthy CFD workflow.
-        </p>
-      </Section>
-
       {/* Commands */}
       <Section
         eyebrow="CLI"

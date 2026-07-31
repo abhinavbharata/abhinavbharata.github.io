@@ -157,6 +157,23 @@ export default async function ProjectCaseStudy({ params }: Props) {
               </p>
             </Section>
 
+            {/* Motivation (cfd-agent only) */}
+            {isCfdAgent && (
+              <Section eyebrow="Motivation" title="Why I built this">
+                <p className="text-base leading-relaxed text-foreground/90">
+                  Recent progress in AI within software and IT prompted a
+                  question: where could this be genuinely useful in mechanical
+                  engineering, rather than just a novelty? CFD stood out —
+                  OpenFOAM is powerful but has a steep setup and interpretation
+                  learning curve, and much of that friction is procedural rather
+                  than physics-driven. cfd-agent is my exploration of that
+                  question: using AI for interpretation and explanation while
+                  keeping simulation generation, execution, and validation fully
+                  deterministic and engineer-reviewed.
+                </p>
+              </Section>
+            )}
+
             {/* Problem */}
             <Section eyebrow="Problem" title="Engineering problem">
               <p className="text-base leading-relaxed text-muted">
@@ -200,25 +217,6 @@ export default async function ProjectCaseStudy({ params }: Props) {
             {project.analysis && project.analysis.length > 0 && (
               <Section eyebrow="Analysis" title="Analysis and simulation">
                 <Bullets items={project.analysis} />
-              </Section>
-            )}
-
-            {/* Architecture */}
-            {project.architecture && project.architecture.length > 0 && (
-              <Section
-                eyebrow="Architecture"
-                title="System / product architecture"
-              >
-                <ul className="space-y-2">
-                  {project.architecture.map((a) => (
-                    <li
-                      key={a}
-                      className="rounded-md border border-border bg-surface px-3.5 py-2 font-mono text-[0.78rem] leading-relaxed text-foreground/85"
-                    >
-                      {a}
-                    </li>
-                  ))}
-                </ul>
               </Section>
             )}
 

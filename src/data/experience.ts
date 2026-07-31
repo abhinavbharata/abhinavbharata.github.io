@@ -26,7 +26,7 @@ export const experience: ExperienceItem[] = [
       "Participate in FAT and SAT activities.",
       "Support commissioning and functional-performance validation.",
       "Develop remediation proposals for enclosure penetrations, leakage, and sealing problems.",
-      "Coordinate with electrical, structural, fire-protection, manufacturing, and quality teams.",
+      "Coordinate with electrical, structural, and fire-protection teams.",
     ],
     achievements: [
       "Maintained enclosure temperature target of 23 ± 5 °C across staged heat-load validation.",

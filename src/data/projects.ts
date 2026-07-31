@@ -122,7 +122,7 @@ export const projects: Project[] = [
       "CFD",
       "OpenFOAM",
       "Software Architecture",
-      "AI Engineering",
+      "AI Integration",
       "Simulation Automation",
     ],
     deliverables: [
@@ -145,15 +145,6 @@ export const projects: Project[] = [
       "STL bounding-box, surface-area, and coordinate-range analysis drive automatic unit detection.",
       "millimeter-to-meter scaling is applied when geometry appears to use millimeter units, as an engineering safeguard to be reviewed.",
       "constant/polyMesh/boundary is inspected to confirm expected geometry-derived patches are present before solving.",
-    ],
-    architecture: [
-      "cfd_agent/agent.py — Claude API integration, interpretation, case-aware chat, diagnosis, results interpretation, file explanation.",
-      "cfd_agent/case_generator.py — directory creation, boundary-condition fields, transport and turbulence configuration, solver controls, numerical schemes, mesh dictionaries, decomposition settings.",
-      "cfd_agent/runner.py — OpenFOAM subprocess execution, meshing pipeline, solver execution, live output, residual and mesh-statistics parsing, convergence and fatal-error detection, geometry–mesh invariant validation.",
-      "cfd_agent/geometry.py — STL loading, bounding box, surface area, unit detection, scaling, boundary analysis, geometry warnings.",
-      "cfd_agent/cli.py — Click commands, Rich interface, prompts, progress, workflow orchestration, user-facing errors.",
-      "cfd_agent/config.py — solver registry, turbulence models, fluid definitions, supported configurations, validation rules.",
-      "cfd_agent/exceptions.py — base exception, configuration/STL/meshing/solver errors, geometry–mesh mismatch, consistent reporting.",
     ],
     validation: [
       "Geometry–Mesh Invariant Guard: verifies snappyHexMesh incorporated the supplied STL by inspecting constant/polyMesh/boundary; raises GeometryMeshMismatchError and blocks solving when expected patches are absent.",
@@ -190,6 +181,7 @@ export const projects: Project[] = [
       "hybrid-inverter-cooling",
       "portable-heat-pump",
     ],
+    personalProject: true,
     featured: false,
     seoTitle: "cfd-agent | AI-Powered OpenFOAM Simulation Assistant",
     seoDescription:
