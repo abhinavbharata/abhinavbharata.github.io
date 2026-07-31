@@ -11,7 +11,7 @@ export const profile = {
   name: "Abhinav Bharata",
   primaryTitle: "Mechanical Engineer · Data Center & Thermal Systems",
   extendedTitle:
-    "Data Center Infrastructure | CFD | Revit BIM | Thermal Systems | Engineering Automation",
+    "Data Center Infrastructure | CFD | Revit BIM | Thermal Systems",
   location: "Pelzer, South Carolina",
   phone: "+1 (443) 851-0407",
   phoneHref: "tel:+14438510407",

@@ -110,7 +110,7 @@ export const philosophy: PhilosophyPrinciple[] = [
 export const aboutPhilosophy: string[] = [
   "Design decisions should be supported by analysis and testing.",
   "Thermal performance must be evaluated at system level.",
-  "Simulation should complement physical validation.",
+  "Simulation should reduce uncertainty, not replace physical validation.",
   "Good engineering balances performance, reliability, manufacturability, serviceability, cost, and safety.",
   "Cross-disciplinary coordination is essential in mission-critical infrastructure.",
   "Automation should expose important assumptions rather than hide them.",

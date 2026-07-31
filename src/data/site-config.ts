@@ -10,7 +10,7 @@ export const siteConfig = {
   formalName: "Abhinav Bharata",
   primaryTitle: "Mechanical Engineer · Data Center & Thermal Systems",
   extendedTitle:
-    "Data Center Infrastructure | CFD | Revit BIM | Thermal Systems | Engineering Automation",
+    "Data Center Infrastructure | CFD | Revit BIM | Thermal Systems",
   /** Production origin. Falls back to localhost for local development. */
   url: env.siteUrl,
   description:

@@ -63,7 +63,7 @@ export default function AboutPage() {
             <Section
               className="mt-14"
               eyebrow="Engineering automation"
-              title="cfd-agent — engineering software from engineering experience"
+              title="cfd-agent — An OpenFOAM assistant built from hands-on CFD and engineering practice"
             >
               <p className="text-base leading-relaxed text-muted">
                 Alongside my infrastructure and thermal engineering work, I am
@@ -147,7 +147,7 @@ export default function AboutPage() {
         <div className="mt-16">
           <SectionHeading
             eyebrow="Career timeline"
-            title="From mechanical engineer to critical-infrastructure and automation work"
+            title="Career progression across mechanical design, thermal engineering, and critical infrastructure"
           />
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {experience.map((role) => (
@@ -179,7 +179,7 @@ export default function AboutPage() {
         </div>
       </Container>
 
-      <CtaBand eyebrow="Let’s connect" title="Open to data-center, thermal, CFD, and engineering-automation roles.">
+      <CtaBand eyebrow="Let’s connect" title="Open to data-center, thermal, and CFD engineering roles.">
         <Button href="/contact">Get in touch</Button>
         <Button href="/projects" variant="secondary">
           Explore projects
