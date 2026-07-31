@@ -19,9 +19,9 @@ export const siteConfig = {
   twitterHandle: "",
   positioning: {
     central:
-      "Mechanical engineer designing and validating data-center infrastructure, thermal systems, and CFD-driven products.",
+      "Mechanical engineer working on data-center thermal systems and infrastructure design.",
     supporting:
-      "I work across data-center infrastructure, Revit BIM, liquid cooling, CFD, mechanical systems, power-module validation, and engineering automation.",
+      "Currently producing BIM construction documents and running thermal validation for data-center enclosures and power modules, with a background in CFD, liquid cooling, and mechanical product design.",
     innovation:
       "I am currently developing cfd-agent, an AI-powered OpenFOAM assistant that transforms natural-language engineering requirements into structured, runnable CFD simulations.",
   },

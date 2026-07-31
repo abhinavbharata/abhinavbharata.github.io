@@ -104,7 +104,7 @@ export default function HomePage() {
                     "Develop liquid-cooling layouts and BIM-ready mechanical content.",
                     "Support heat-load testing of power modules and UPS systems.",
                     "Participate in FAT, SAT, and commissioning validation.",
-                    "Coordinate across mechanical, electrical, structural, manufacturing, and fire-protection disciplines.",
+                    "Coordinate across mechanical, electrical, structural, and fire-protection disciplines.",
                   ].map((point) => (
                     <li
                       key={point}

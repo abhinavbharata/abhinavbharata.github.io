@@ -102,7 +102,7 @@ export function SiteHeader() {
                 Abhinav Bharata
               </span>
               <span className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-muted">
-                Mech &amp; Thermal Eng
+                Mechanical Engineer
               </span>
             </span>
           </Link>

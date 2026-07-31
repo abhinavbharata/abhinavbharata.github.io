@@ -46,8 +46,8 @@ export function Hero() {
               <span className="text-faint">· {profile.location}</span>
             </p>
             <h1 className="max-w-3xl text-3xl font-semibold leading-[1.12] tracking-tight text-foreground sm:text-4xl lg:text-[2.6rem]">
-              Mechanical engineer designing and validating data-center
-              infrastructure, thermal systems, and CFD-driven products.
+              Mechanical engineer working on data-center thermal systems
+              and infrastructure design.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
               {siteConfig.positioning.supporting}

@@ -40,14 +40,12 @@ export const capabilityCards: CapabilityCard[] = [
   },
   {
     id: "automation",
-    title: "Engineering Automation",
+    title: "Scripting & Automation",
     points: [
       "Python",
-      "Natural-language interfaces",
-      "Simulation workflow automation",
-      "Live process monitoring",
-      "AI-assisted diagnostics",
-      "Validation guards",
+      "MATLAB",
+      "Automation scripting",
+      "Data visualization",
     ],
   },
 ];
